@@ -1,0 +1,21 @@
+version: "3.3"
+services: 
+  pve-extract:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: sophienland/pve-extract:latest
+    environment:
+      - EXTRACT_FILE=<filename_backup>
+    volumes:
+      - type: volume
+        source: datavolume
+        target: /backup
+
+volumes:
+   datavolume:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: <path_to_directory>
